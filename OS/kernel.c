@@ -34,8 +34,8 @@ void main(void) {
 terminal_buffer=(unsigned short *)VGA_ADDRESS;
 vga_index=0;
 clear_screen();
-print_string("Hello from linux jornal!",YELLOW);
+print_string("Hello from Salif simple OS",GREEN);
 vga_index=80; // next line
-print_string("Goodbye from linux jornal!",RED);
+print_string("Goodbye from Salif simple OS",RED);
 return;
 }
