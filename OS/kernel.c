@@ -1,41 +1,31 @@
-
-
-#define VGA_ADDRESS 0XB8000 /* video memory begins here. and VGA provides support for 16 colors*/
-#define BLACK 0
-#define GREEN 2
-#define RED 4
-#define YELLOW 14
-#define WHITE_COLOR 15
-
-unsigned short *terminal_buffer;
-unsigned int vga_index;
-
-void clear_screen(void) 
+#include "include/screen.h"
+#include "include/kb.h"
+#include "include/string.h"
+void kmain()
 {
-
-	int index = 0;
-	/* here, there are 25 lines ech of 80 columns; each element takes 2 bytes*/
-	while(index<80*25*2){
-	terminal_buffer[index]=' ';
-	index +=2;
-	}
-}
-
-void print_string(char *str, unsigned char color) {
-int index=0;
-while(str[index]){
-terminal_buffer[vga_index]=(unsigned short)str[index]|(unsigned short)color <<8;
-	index++;
-	vga_index++;
-	}
-}
-
-void main(void) {
-terminal_buffer=(unsigned short *)VGA_ADDRESS;
-vga_index=0;
-clear_screen();
-print_string("Hello from Salif simple OS",GREEN);
-vga_index=80; // next line
-print_string("Goodbye from Salif simple OS",RED);
-return;
+       clearScreen();
+       print("Welcome to our simple operating system\nPlease enter a command\n\n");
+       print("NOTE: Some commands are bad commands, Please do avoid them.\n");
+       while (1)
+       {
+                print("\nSimple OS> ");
+                
+                string ch = readStr();
+                if(strEql(ch,"cmd"))
+                {
+                        print("\nYou are allready in command prompt\n");
+                }
+                else if(strEql(ch,"clear"))
+                {
+                        clearScreen();
+                }
+                
+                else
+                {
+                        print("\nBad command!\n");
+                }
+                
+                print("\n");        
+       }
+        
 }
